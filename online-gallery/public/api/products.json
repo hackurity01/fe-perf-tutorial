@@ -217,60 +217,11 @@
     "description": "Our tiger-friendly Shoes ensures average comfort for your pets"
   },
   {
-    "id": 32,
-    "name": "Unbranded Rubber Pizza",
-    "price": 673.89,
-    "imageUrl": "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=2000&q=80",
-    "description": "Soft Shirt designed with Aluminum for black-and-white performance"
-  },
-  {
-    "id": 33,
-    "name": "Soft Wooden Shoes",
-    "price": 605.99,
-    "imageUrl": "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=2000&q=80",
-    "description": "Innovative Car featuring mad technology and Ceramic construction"
-  },
-  {
-    "id": 34,
-    "name": "Recycled Wooden Bacon",
-    "price": 321.55,
-    "imageUrl": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=2000&q=80",
-    "description": "Price, Rolfson and Toy's most advanced Sausages technology increases ashamed capabilities"
-  },
-  {
     "id": 35,
     "name": "Handcrafted Silk Gloves",
     "price": 474.2,
     "imageUrl": "https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?auto=format&fit=crop&w=2000&q=80",
     "description": "The sleek and idealistic Pants comes with lavender LED lighting for smart functionality"
-  },
-  {
-    "id": 36,
-    "name": "Electronic Concrete Tuna",
-    "price": 685.89,
-    "imageUrl": "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=2000&q=80",
-    "description": "The Morton Car is the latest in a series of granular products from Dooley - Balistreri"
-  },
-  {
-    "id": 37,
-    "name": "Soft Cotton Bacon",
-    "price": 126.15,
-    "imageUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=2000&q=80",
-    "description": "Experience the blue brilliance of our Shoes, perfect for present environments"
-  },
-  {
-    "id": 38,
-    "name": "Sleek Bamboo Table",
-    "price": 920.39,
-    "imageUrl": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=2000&q=80",
-    "description": "The Automated high-level hardware Tuna offers reliable performance and direct design"
-  },
-  {
-    "id": 39,
-    "name": "Oriental Gold Hat",
-    "price": 358.39,
-    "imageUrl": "https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=2000&q=80",
-    "description": "The Front-line intangible productivity Sausages offers reliable performance and low design"
   },
   {
     "id": 40,
@@ -287,34 +238,6 @@
     "description": "The Chance Car is the latest in a series of surprised products from Buckridge, Boyer and Schroeder"
   },
   {
-    "id": 42,
-    "name": "Tasty Wooden Salad",
-    "price": 687.1,
-    "imageUrl": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=2000&q=80",
-    "description": "Ergonomic Chips made with Steel for all-day weird support"
-  },
-  {
-    "id": 43,
-    "name": "Handmade Metal Fish",
-    "price": 409.55,
-    "imageUrl": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=2000&q=80",
-    "description": "The olive Fish combines British Indian Ocean Territory (Chagos Archipelago) aesthetics with Ruthenium-based durability"
-  },
-  {
-    "id": 44,
-    "name": "Handmade Marble Chair",
-    "price": 973.89,
-    "imageUrl": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=2000&q=80",
-    "description": "The Triple-buffered attitude-oriented complexity Bike offers reliable performance and mixed design"
-  },
-  {
-    "id": 45,
-    "name": "Fantastic Rubber Salad",
-    "price": 169.79,
-    "imageUrl": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=2000&q=80",
-    "description": "Stylish Shirt designed to make you stand out with male looks"
-  },
-  {
     "id": 46,
     "name": "Sleek Aluminum Towels",
     "price": 538.69,
@@ -327,20 +250,6 @@
     "price": 256.09,
     "imageUrl": "https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?auto=format&fit=crop&w=2000&q=80",
     "description": "Experience the lime brilliance of our Sausages, perfect for babyish environments"
-  },
-  {
-    "id": 48,
-    "name": "Bespoke Ceramic Chips",
-    "price": 767.87,
-    "imageUrl": "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?auto=format&fit=crop&w=2000&q=80",
-    "description": "Discover the grave new Shirt with an exciting mix of Granite ingredients"
-  },
-  {
-    "id": 49,
-    "name": "Handmade Granite Tuna",
-    "price": 554.35,
-    "imageUrl": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=2000&q=80",
-    "description": "Experience the red brilliance of our Sausages, perfect for silent environments"
   },
   {
     "id": 50,
