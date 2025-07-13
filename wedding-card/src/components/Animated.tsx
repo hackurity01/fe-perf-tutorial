@@ -1,24 +1,31 @@
+import type { CSSProperties } from "react";
 import { type Descriptor, useAnimatedStyles } from "../hooks/useAnimatedStyles";
 
 interface AnimatedProps {
   progress: number;
   animations: Descriptor[];
   children?: React.ReactNode;
+  style?: CSSProperties;
+  className?: string;
 }
 
-export function Animated({ progress, animations, children }: AnimatedProps) {
-  const style = useAnimatedStyles(progress, animations);
+export function Animated({
+  progress,
+  animations,
+  children,
+  style,
+  className,
+}: AnimatedProps) {
+  const animatedStyle = useAnimatedStyles(progress, animations);
 
   return (
-    <div
+    <span
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
+        ...animatedStyle,
         ...style,
-      }}>
+      }}
+      className={className}>
       {children}
-    </div>
+    </span>
   );
 }

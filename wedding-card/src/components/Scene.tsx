@@ -1,31 +1,26 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { useSceneProgress } from "../hooks/useSceneProgress";
 
 interface SceneProps {
-  start: number;
-  end: number;
+  height: number;
   children?: (progress: number) => React.ReactNode;
+  className?: string;
 }
 
-export function Scene({ start, end, children }: SceneProps) {
+export function Scene({ height, className, children }: SceneProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const progress = useSceneProgress(ref, start, end);
-  const [containerHeight, setContainerHeight] = useState(
-    end - start + (typeof window !== "undefined" ? window.innerHeight : 0)
-  );
-
-  useEffect(() => {
-    const updateHeight = () => {
-      setContainerHeight(end - start + window.innerHeight);
-    };
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
-  }, [start, end]);
+  const progress = useSceneProgress(ref, height);
 
   return (
-    <div ref={ref} style={{ position: "relative", height: containerHeight }}>
-      {children?.(progress)}
+    <div
+      ref={ref}
+      className={`relative ${className ?? ""}`}
+      style={{
+        height,
+      }}>
+      <div className="max-w-[500px] m-auto h-full">
+        {0 <= progress && progress < 1 ? children?.(progress) : null}
+      </div>
     </div>
   );
 }

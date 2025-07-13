@@ -1,31 +1,34 @@
 import { animation, type AnimationFunction } from "./animation";
 /**
- * calcTween: 진행률 → 보간된 값
+ * calcTween: 진행률 → 보간된 값 (keyframes 기반)
  * @param progress - 현재 스크롤 진행률 (0에서 1)
- * @param from - 시작 값
- * @param to - 끝 값
- * @param range - 선택적 [시작진행률, 끝진행률], 기본값 [0,1]
- * @param AnimationFunction - 선택적 애니메이션 함수, 기본값 animation.linear
- * @returns `from`과 `to` 사이의 보간된 값
+ * @param keyframes - [진행률, 값] 쌍의 배열. 예: [[0,0],[0.1,1],[0.8,1],[1,0]]
+ * @param tweenFn - 선택적 애니메이션 함수, 기본값 animation.linear (구간별 적용)
+ * @returns keyframes 사이의 보간된 값
  */
 export function calcTween({
   progress,
-  from,
-  to,
-  progressRange = [0, 1],
+  keyframes,
   tweenFn = animation.linear,
 }: {
   progress: number;
-  from: number;
-  to: number;
-  progressRange?: [number, number];
+  keyframes: Array<[number, number]>;
   tweenFn?: AnimationFunction;
 }): number {
-  const [r0, r1] = progressRange;
-  // map progress into [0,1] within the given range
-  const clamped = Math.min(1, Math.max(0, (progress - r0) / (r1 - r0)));
-  // apply easing
-  const t = tweenFn(clamped);
-  // interpolate
-  return from + (to - from) * t;
+  if (!keyframes || keyframes.length === 0) return 0;
+  if (progress <= keyframes[0][0]) return keyframes[0][1];
+  if (progress >= keyframes[keyframes.length - 1][0])
+    return keyframes[keyframes.length - 1][1];
+
+  for (let i = 0; i < keyframes.length - 1; i++) {
+    const [p0, v0] = keyframes[i];
+    const [p1, v1] = keyframes[i + 1];
+    if (progress >= p0 && progress <= p1) {
+      const localT = (progress - p0) / (p1 - p0);
+      const t = tweenFn(localT);
+      return v0 + (v1 - v0) * t;
+    }
+  }
+
+  return 0;
 }

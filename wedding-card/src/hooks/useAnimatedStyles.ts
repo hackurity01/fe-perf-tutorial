@@ -4,11 +4,9 @@ import { calcTween } from "../utils/calcTween";
 export type Descriptor = {
   /** CSS 속성명 또는 transform 함수명(e.g. 'translateX','scale') */
   prop: keyof CSSProperties | "translateX" | "translateY" | "rotate";
-  from: number;
-  to: number;
+  keyframes: Array<[number, number]>; // [progress, value] 쌍의 배열
   unit?: string; // 기본: ''
-  range?: [number, number]; // progress 범위, 기본 [0,1]
-  tweenFn?: (t: number) => number; // 기본 linear
+  tweenFn?: (t: number) => number; // 기본 linear (구간별 적용)
 };
 
 export function useAnimatedStyles(
@@ -18,12 +16,10 @@ export function useAnimatedStyles(
   const styles: Record<string, string> = {};
   const transformFns: string[] = [];
 
-  descriptors.forEach(({ prop, from, to, unit = "", range, tweenFn }) => {
+  descriptors.forEach(({ prop, keyframes, unit = "", tweenFn }) => {
     const value = calcTween({
       progress,
-      from,
-      to,
-      progressRange: range,
+      keyframes,
       tweenFn,
     });
     if (prop === "translateX" || prop === "translateY" || prop === "rotate") {
