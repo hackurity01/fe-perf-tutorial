@@ -1,27 +1,29 @@
-import { useState, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getProducts } from "@/data/mockData";
+import { useState, useEffect } from "react";
 import ProductDrawer from "@/components/ProductDrawer";
 import type { Product } from "@/types";
+import { sumBy } from "lodash";
+import { getProducts } from "@/data/mockData";
+import { useQuery } from "@tanstack/react-query";
 
 function Products() {
   const [query, setQuery] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [editProductId, setEditProductId] = useState<number | null>(null);
+  const [summary, setSummary] = useState({ total: 0, inStock: 0 });
 
-  // useQuery for products
   const { data: rows = [], isLoading } = useQuery<Product[]>({
     queryKey: ["products", query],
     queryFn: () => getProducts({ query }),
   });
 
-  const summary = useMemo(
-    () => ({
+  useEffect(() => {
+    if (!rows.length) return;
+
+    setSummary({
       total: rows.length,
-      inStock: rows.filter((p) => p.stock > 0).length,
-    }),
-    [rows]
-  );
+      inStock: sumBy(rows, (p: Product) => (p.stock > 0 ? 1 : 0)),
+    });
+  }, [rows]);
 
   // 수정 버튼 클릭 시
   const handleEdit = (id: number) => {
@@ -102,7 +104,11 @@ function Products() {
       <ProductDrawer
         open={drawerOpen}
         onClose={handleCloseDrawer}
-        initialData={rows.find((p) => p.id === editProductId) || null}
+        initialData={
+          editProductId
+            ? rows.find((p) => p.id === editProductId) || null
+            : null
+        }
         onSave={handleSave}
       />
     </div>
