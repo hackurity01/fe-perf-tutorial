@@ -1,30 +1,30 @@
-// TODO: 최적화 전
-import React, { useState, useEffect } from "react";
-import { users as mockUsers } from "@/data/mockData";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getUsers } from "@/data/mockData";
 import ProgressBar from "@/components/ProgressBar";
+import type { User } from "@/types";
 
-// Remove departments and dept state, add roles and role state
 const roles = ["All", "Admin", "Manager", "User", "Guest"];
 
-const UserList: React.FC = () => {
+function UserList() {
   const [query, setQuery] = useState("");
   const [role, setRole] = useState("All");
-  const [filtered, setFiltered] = useState(mockUsers);
+  const [filtered, setFiltered] = useState<User[]>([]);
+
+  const { data: users = [], isLoading } = useQuery<User[]>({
+    queryKey: ["users"],
+    queryFn: getUsers,
+  });
 
   useEffect(() => {
-    let result = mockUsers;
-    if (query) {
-      result = result.filter(
+    setFiltered(
+      users.filter(
         (u) =>
           u.name.toLowerCase().includes(query.toLowerCase()) ||
           u.email.toLowerCase().includes(query.toLowerCase())
-      );
-    }
-    if (role !== "All") {
-      result = result.filter((u) => u.role === role);
-    }
-    setFiltered(result);
-  }, [query, role]);
+      )
+    );
+  }, [users, query, role]);
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -47,7 +47,7 @@ const UserList: React.FC = () => {
           ))}
         </select>
         <span className="text-gray-500 self-center">
-          총 {filtered.length}명
+          {isLoading ? "로딩 중..." : `총 ${filtered.length}명`}
         </span>
       </div>
       <div className="overflow-auto border rounded shadow">
@@ -85,6 +85,6 @@ const UserList: React.FC = () => {
       </p>
     </div>
   );
-};
+}
 
 export default UserList;

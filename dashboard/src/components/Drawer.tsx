@@ -7,12 +7,7 @@ interface DrawerProps {
   width?: number | string;
 }
 
-const Drawer: React.FC<DrawerProps> = ({
-  open,
-  onClose,
-  children,
-  width = 320,
-}) => {
+function Drawer({ open, onClose, children, width = 320 }: DrawerProps) {
   return (
     <aside
       className={`fixed top-0 right-0 h-full bg-white shadow-lg z-50 transition-transform duration-300 ease-in-out ${
@@ -30,6 +25,6 @@ const Drawer: React.FC<DrawerProps> = ({
       <div className="p-6 h-full overflow-y-auto">{children}</div>
     </aside>
   );
-};
+}
 
 export default Drawer;

@@ -9,7 +9,7 @@ const initialUser = {
   joinDate: "2024-01-01",
 };
 
-const Settings: React.FC = () => {
+function Settings() {
   const [firstName, setFirstName] = useState(initialUser.firstName);
   const [lastName, setLastName] = useState(initialUser.lastName);
   const [email, setEmail] = useState(initialUser.email);
@@ -97,6 +97,6 @@ const Settings: React.FC = () => {
       </p>
     </div>
   );
-};
+}
 
 export default Settings;

@@ -1,6 +1,7 @@
-// TODO: 최적화 전
-import React, { useState, useEffect } from "react";
-import { chartsData } from "@/data/mockData";
+import { useState, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getChartsData } from "@/data/mockData";
+import type { ChartData } from "@/types";
 import {
   LineChart,
   Line,
@@ -25,36 +26,40 @@ const periods = [
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"];
 
-const Analytics: React.FC = () => {
+function Analytics() {
   const [period, setPeriod] = useState(periods[3].days);
-  const [filtered, setFiltered] = useState(chartsData);
 
-  // 비효율: useEffect에서 동기 filter+reduce, render 블로킹
-  useEffect(() => {
+  const { data: chartsData = [], isLoading } = useQuery<ChartData[]>({
+    queryKey: ["chartsData"],
+    queryFn: getChartsData,
+  });
+
+  const filtered = useMemo(() => {
     const now = new Date("2025-12-31");
     const from = new Date(now);
     from.setDate(now.getDate() - period + 1);
-    setFiltered(
-      chartsData.filter((d) => {
-        const date = new Date(d.date);
-        return date >= from && date <= now;
-      })
-    );
-  }, [period]);
+    return chartsData.filter((d) => {
+      const date = new Date(d.date);
+      return date >= from && date <= now;
+    });
+  }, [chartsData, period]);
 
   // Pie 데이터: value 0~249, 250~499, 500~749, 750~999
-  const pieData = [
-    { name: "0-249", value: filtered.filter((d) => d.value < 250).length },
-    {
-      name: "250-499",
-      value: filtered.filter((d) => d.value >= 250 && d.value < 500).length,
-    },
-    {
-      name: "500-749",
-      value: filtered.filter((d) => d.value >= 500 && d.value < 750).length,
-    },
-    { name: "750-999", value: filtered.filter((d) => d.value >= 750).length },
-  ];
+  const pieData = useMemo(
+    () => [
+      { name: "0-249", value: filtered.filter((d) => d.value < 250).length },
+      {
+        name: "250-499",
+        value: filtered.filter((d) => d.value >= 250 && d.value < 500).length,
+      },
+      {
+        name: "500-749",
+        value: filtered.filter((d) => d.value >= 500 && d.value < 750).length,
+      },
+      { name: "750-999", value: filtered.filter((d) => d.value >= 750).length },
+    ],
+    [filtered]
+  );
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -73,7 +78,7 @@ const Analytics: React.FC = () => {
           </button>
         ))}
         <span className="text-gray-500 self-center">
-          데이터 {filtered.length}건
+          {isLoading ? "로딩 중..." : `데이터 ${filtered.length}건`}
         </span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -131,6 +136,6 @@ const Analytics: React.FC = () => {
       </p>
     </div>
   );
-};
+}
 
 export default Analytics;

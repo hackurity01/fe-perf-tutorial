@@ -6,11 +6,7 @@ interface ProgressBarProps {
   className?: string;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({
-  value,
-  width = 80,
-  className,
-}) => {
+function ProgressBar({ value, width = 80, className }: ProgressBarProps) {
   const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,6 +32,6 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
       </span>
     </div>
   );
-};
+}
 
 export default ProgressBar;

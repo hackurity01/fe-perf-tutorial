@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import Drawer from "./Drawer";
-
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: string;
-  stock: number;
-  image: string;
-}
+import type { Product } from "@/types";
 
 interface ProductDrawerProps {
   open: boolean;
@@ -18,13 +10,13 @@ interface ProductDrawerProps {
   title?: string;
 }
 
-const ProductDrawer: React.FC<ProductDrawerProps> = ({
+function ProductDrawer({
   open,
   onClose,
   initialData,
   onSave,
   title = "상품 수정",
-}) => {
+}: ProductDrawerProps) {
   const [form, setForm] = useState<Product | null>(initialData);
 
   React.useEffect(() => {
@@ -107,6 +99,6 @@ const ProductDrawer: React.FC<ProductDrawerProps> = ({
       </div>
     </Drawer>
   );
-};
+}
 
 export default ProductDrawer;

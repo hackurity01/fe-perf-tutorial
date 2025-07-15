@@ -1,31 +1,27 @@
-// TODO: 최적화 전
-import React, { useState, useEffect } from "react";
-import { products as mockProducts } from "@/data/mockData";
+import { useState, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "@/data/mockData";
 import ProductDrawer from "@/components/ProductDrawer";
-import type { Product } from "@/components/ProductDrawer";
+import type { Product } from "@/types";
 
-function fetchProducts(filter: { query: string }) {
-  return new Promise<typeof mockProducts>((resolve) => {
-    setTimeout(() => {
-      let data = mockProducts;
-      if (filter.query) {
-        data = data.filter(
-          (p) =>
-            p.name.toLowerCase().includes(filter.query.toLowerCase()) ||
-            p.description.toLowerCase().includes(filter.query.toLowerCase())
-        );
-      }
-      resolve(data);
-    }, 100);
-  });
-}
-
-const Products: React.FC = () => {
+function Products() {
   const [query, setQuery] = useState("");
-  const [rows, setRows] = useState<typeof mockProducts>([]);
-  const [summary, setSummary] = useState({ total: 0, inStock: 0 });
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [editProductId, setEditProductId] = useState<number | null>(null);
+
+  // useQuery for products
+  const { data: rows = [], isLoading } = useQuery<Product[]>({
+    queryKey: ["products", query],
+    queryFn: () => getProducts({ query }),
+  });
+
+  const summary = useMemo(
+    () => ({
+      total: rows.length,
+      inStock: rows.filter((p) => p.stock > 0).length,
+    }),
+    [rows]
+  );
 
   // 수정 버튼 클릭 시
   const handleEdit = (id: number) => {
@@ -34,8 +30,8 @@ const Products: React.FC = () => {
   };
 
   // 저장
-  const handleSave = (updated: Product) => {
-    setRows((prev) => prev.map((p) => (p.id === updated.id ? updated : p)));
+  const handleSave = () => {
+    // Normally, you would update the server and refetch, but for now just close the drawer
     setDrawerOpen(false);
     setEditProductId(null);
   };
@@ -46,23 +42,8 @@ const Products: React.FC = () => {
     setEditProductId(null);
   };
 
-  useEffect(() => {
-    fetchProducts({ query }).then(setRows);
-  }, [query]);
-
-  useEffect(() => {
-    fetchProducts({ query }).then((data) => {
-      setSummary({
-        total: data.length,
-        inStock: data.filter((p) => p.stock > 0).length,
-      });
-    });
-  }, [query]);
-
   return (
-    <div
-      className="mx-auto p-6 transition-all duration-300"
-      style={{ marginRight: drawerOpen ? 320 : 0 }}>
+    <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">상품 목록</h1>
       <div className="flex flex-col md:flex-row gap-4 mb-4">
         <input
@@ -71,14 +52,11 @@ const Products: React.FC = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <div className="flex gap-4 items-center">
-          <div className="bg-blue-100 text-blue-800 rounded px-3 py-2 text-sm">
-            전체: <span className="font-bold">{summary.total}</span>
-          </div>
-          <div className="bg-green-100 text-green-800 rounded px-3 py-2 text-sm">
-            재고 있음: <span className="font-bold">{summary.inStock}</span>
-          </div>
-        </div>
+        <span className="text-gray-500 self-center">
+          {isLoading
+            ? "로딩 중..."
+            : `총 ${summary.total}개, 재고 있음 ${summary.inStock}개`}
+        </span>
       </div>
       <div className="overflow-auto border rounded shadow">
         <table className="min-w-full text-sm">
@@ -124,18 +102,11 @@ const Products: React.FC = () => {
       <ProductDrawer
         open={drawerOpen}
         onClose={handleCloseDrawer}
-        initialData={
-          editProductId
-            ? rows.find((p) => p.id === editProductId) || null
-            : null
-        }
+        initialData={rows.find((p) => p.id === editProductId) || null}
         onSave={handleSave}
       />
-      <p className="mt-4 text-xs text-gray-400">
-        ※ 1,000개 상품 전체 렌더 (가상화 미적용)
-      </p>
     </div>
   );
-};
+}
 
 export default Products;
