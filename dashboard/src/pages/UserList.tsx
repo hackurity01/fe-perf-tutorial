@@ -11,12 +11,14 @@ function UserList() {
   const [role, setRole] = useState("All");
   const [filtered, setFiltered] = useState<User[]>([]);
 
-  const { data: users = [], isLoading } = useQuery<User[]>({
+  const { data: users, isLoading } = useQuery<User[]>({
     queryKey: ["users"],
     queryFn: getUsers,
   });
 
   useEffect(() => {
+    if (!users) return;
+
     setFiltered(
       users.filter(
         (u) =>
@@ -57,7 +59,7 @@ function UserList() {
               <th className="px-3 py-2 text-left">ID</th>
               <th className="px-3 py-2 text-left">이름</th>
               <th className="px-3 py-2 text-left">이메일</th>
-              <th className="px-3 py-2 text-left">평가점수</th>
+              <th className="px-3 py-2 text-left w-[200px]">평가점수</th>
               <th className="px-3 py-2 text-left">권한</th>
               <th className="px-3 py-2 text-left">주소</th>
               <th className="px-3 py-2 text-left">나이</th>

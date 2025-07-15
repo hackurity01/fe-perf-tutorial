@@ -5,7 +5,7 @@ export const getUsers = (): Promise<User[]> =>
   new Promise((resolve) => {
     setTimeout(() => {
       resolve(
-        Array.from({ length: 2000 }, (_, i) => ({
+        Array.from({ length: 40 }, (_, i) => ({
           id: i + 1,
           name: faker.person.fullName(),
           email: faker.internet.email(),
