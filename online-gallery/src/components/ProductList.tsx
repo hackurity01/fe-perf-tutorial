@@ -1,7 +1,6 @@
-import React from "react";
-import ProductCard from "./ProductCard";
 import { useQuery } from "@tanstack/react-query";
 import type { Product } from "@/types/product";
+import ProductCard from "./ProductCard";
 
 const fetchProducts = async (): Promise<Product[]> => {
   const res = await fetch("/api/products.json");
@@ -13,7 +12,7 @@ interface ProductListProps {
   search: string;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ search }) => {
+function ProductList({ search }: ProductListProps) {
   const {
     data: products,
     isLoading,
@@ -127,7 +126,7 @@ const ProductList: React.FC<ProductListProps> = ({ search }) => {
   const filteredProducts = slowFilterAndSort(products ?? [], search);
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-4">
+    <div className="max-w-7xl mx-auto py-4 px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
         {filteredProducts.map((product: Product) => (
           <ProductCard key={product.id} product={product} />
@@ -135,6 +134,6 @@ const ProductList: React.FC<ProductListProps> = ({ search }) => {
       </div>
     </div>
   );
-};
+}
 
 export default ProductList;

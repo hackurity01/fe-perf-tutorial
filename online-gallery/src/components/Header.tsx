@@ -1,4 +1,5 @@
 import React from "react";
+import Banner from "./Banner";
 
 type HeaderProps = {
   search: string;
@@ -6,8 +7,9 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ search, setSearch }) => (
-  <header className="flex flex-col items-center py-8">
+  <header className="flex flex-col items-center py-8 w-full">
     <h1 className="text-3xl font-bold mb-4">Online Gallery</h1>
+    <Banner />
     <input
       type="text"
       value={search}
