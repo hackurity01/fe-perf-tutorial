@@ -9,13 +9,13 @@ function Scene1({ height }: { height: number }) {
           <div
             className="flex flex-col items-center justify-around overflow-hidden"
             style={{ minHeight: height - 50 }}>
-            <div className="flex items-center justify-around w-full">
-              <div className="text-xl">유동균</div>
+            <div className="flex items-center justify-around w-full pt-10">
+              <div className="text-xl">김신랑</div>
               <div className="flex flex-col text-lg w-12 items-stretch text-center">
                 <div className="border-b">11</div>
                 <div>28</div>
               </div>
-              <div className="text-xl">이한주</div>
+              <div className="text-xl">이신부</div>
             </div>
 
             <div className="w-full p-6">

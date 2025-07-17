@@ -78,21 +78,22 @@ function Scene8({ height }: { height: number }) {
               <tbody>
                 <tr>
                   <td className="text-center">
-                    <span>유영선</span>
-                    <span className="pl-2">오민애의</span>
+                    <span>김철수</span>
+                    <span className="pl-2">박영희의</span>
                   </td>
                   <td className="text-center">
                     <span className="pl-2">차남</span>
-                    <span className="pl-2 font-bold text-[1.2rem]">동균</span>
+                    <span className="pl-2 text-[1.2rem]">김신랑</span>
                   </td>
                 </tr>
                 <tr>
                   <td className="text-center">
-                    <span>한명자의</span>
+                    <span>이철수</span>
+                    <span className="pl-2">김영희</span>
                   </td>
                   <td className="text-center">
                     <span className="pl-2">차녀</span>
-                    <span className="pl-2 font-bold text-[1.2rem]">한주</span>
+                    <span className="pl-2 text-[1.2rem]">이신부</span>
                   </td>
                 </tr>
               </tbody>

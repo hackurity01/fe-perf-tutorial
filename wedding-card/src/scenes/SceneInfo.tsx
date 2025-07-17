@@ -13,15 +13,13 @@ function SceneInfo() {
       <div className="mb-8 relative">
         <div className="text-lg leading-6 font-medium mb-1">셔틀버스</div>
         <div className="text-sm leading-7">
-          <span className="font-semibold">12:30</span> (천안아산 KTX역 →
-          모나무르)
+          12:30 (천안아산 KTX역 → 모나무르)
         </div>
         <div className="text-sm leading-7">
           천안아산역 3번 출구 앞 버스정류장에서 탑승
         </div>
         <div className="text-sm leading-7">
-          <span className="font-semibold">15:00</span> (모나무르 → 천안아산
-          KTX역)
+          15:00 (모나무르 → 천안아산 KTX역)
         </div>
         <div className="text-sm leading-7">모나무르 제 2주차장에서 탑승</div>
       </div>

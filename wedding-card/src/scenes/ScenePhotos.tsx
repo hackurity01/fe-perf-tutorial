@@ -24,7 +24,7 @@ export default function ScenePhotos() {
       <Text
         text="우리들의 사진"
         color="#000"
-        className="text-2xl font-semibold text-center block"
+        className="text-2xl text-center block"
         noShadow
       />
       {/* 썸네일 그리드 */}

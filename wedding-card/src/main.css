@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Nanum Myeongjo Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/NanumMyeongjo-Regular.ttf") format("truetype");
+}
+
+body {
+  margin: 0;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  font-family: "Nanum Myeongjo Regular", serif;
+}
