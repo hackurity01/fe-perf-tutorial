@@ -9,7 +9,8 @@ export interface Product {
 
 export interface User {
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   role: "Admin" | "Manager" | "User" | "Guest";
   address: string;

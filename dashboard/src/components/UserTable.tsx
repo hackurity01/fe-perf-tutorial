@@ -28,9 +28,11 @@ function UserTable({ users }: { users: User[] }) {
 
 function UserRow({ user }: { user: User }) {
   return (
-    <tr key={user.id} className="even:bg-gray-50">
+    <tr className="even:bg-gray-50">
       <td className="px-3 py-1 whitespace-nowrap">{user.id}</td>
-      <td className="px-3 py-1 whitespace-nowrap">{user.name}</td>
+      <td className="px-3 py-1 whitespace-nowrap">
+        {user.firstName} {user.lastName}
+      </td>
       <td className="px-3 py-1 whitespace-nowrap">{user.email}</td>
       <td className="px-3 py-1 whitespace-nowrap">
         <ProgressBar value={user.reviewScore} />

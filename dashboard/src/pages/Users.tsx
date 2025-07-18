@@ -23,7 +23,8 @@ function Users() {
     setFiltered(
       users.filter((u) => {
         return (
-          u.name.toLowerCase().includes(query.toLowerCase()) ||
+          u.firstName.toLowerCase().includes(query.toLowerCase()) ||
+          u.lastName.toLowerCase().includes(query.toLowerCase()) ||
           u.email.toLowerCase().includes(query.toLowerCase())
         );
       })

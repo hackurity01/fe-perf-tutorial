@@ -8,7 +8,8 @@ export const getUsers = (): Promise<User[]> =>
       resolve(
         Array.from({ length: 1000 }, (_, i) => ({
           id: i + 1,
-          name: faker.person.fullName(),
+          firstName: faker.person.firstName(),
+          lastName: faker.person.lastName(),
           email: faker.internet.email(),
           role: ["Admin", "Manager", "User", "Guest"][i % 4] as User["role"],
           address: faker.location.streetAddress(),
