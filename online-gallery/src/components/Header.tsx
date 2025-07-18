@@ -1,23 +1,30 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import Banner from "./Banner";
+import { useCart } from "../contexts/CartContext";
 
-type HeaderProps = {
-  search: string;
-  setSearch: (value: string) => void;
-};
+function Header() {
+  const { cart } = useCart();
 
-const Header: React.FC<HeaderProps> = ({ search, setSearch }) => (
-  <header className="flex flex-col items-center py-8 w-full">
-    <h1 className="text-3xl font-bold mb-4">Online Gallery</h1>
-    <Banner />
-    <input
-      type="text"
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-      placeholder="상품을 검색하세요"
-      className="rounded-full px-6 py-2 w-80 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-lg text-center shadow-sm transition"
-    />
-  </header>
-);
+  return (
+    <header className="flex flex-col items-center py-8 w-full">
+      <div className="flex justify-between items-center w-full max-w-4xl px-4 mb-4">
+        <Link to="/" className="hover:opacity-80 transition-opacity">
+          <h1 className="text-3xl font-bold">Online Gallery</h1>
+        </Link>
+        <Link
+          to="/cart"
+          className="relative p-2 text-gray-600 hover:text-blue-600 transition-colors">
+          <span className="text-2xl">🛒</span>
+          {cart.totalItems > 0 && (
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+              {cart.totalItems}
+            </span>
+          )}
+        </Link>
+      </div>
+      <Banner />
+    </header>
+  );
+}
 
 export default Header;

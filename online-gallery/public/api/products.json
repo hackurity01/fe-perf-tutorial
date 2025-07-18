@@ -250,12 +250,5 @@
     "price": 256.09,
     "imageUrl": "https://images.unsplash.com/photo-1508427953056-b00b8d78ebf5?fm=png&w=1800&q=100",
     "description": "Experience the lime brilliance of our Sausages, perfect for babyish environments"
-  },
-  {
-    "id": 50,
-    "name": "Small Cotton Ball",
-    "price": 307.28,
-    "imageUrl": "https://images.unsplash.com/photo-1445205170230-053b83016050?fm=png&w=1800&q=100",
-    "description": "Ergonomic Cheese made with Metal for all-day optimal support"
   }
 ]
