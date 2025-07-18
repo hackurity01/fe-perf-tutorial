@@ -18,9 +18,7 @@ export function Scene({ height, className, children }: SceneProps) {
       style={{
         height,
       }}>
-      <div className="max-w-[500px] m-auto h-full">
-        {0 <= progress && progress < 1 ? children?.(progress) : null}
-      </div>
+      <div className="max-w-[500px] m-auto h-full">{children?.(progress)}</div>
     </div>
   );
 }
