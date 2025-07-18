@@ -30,7 +30,7 @@ function Scene6({ height }: { height: number }) {
             <Picture src={img1} />
           </Animated>
 
-          <div className="flex justify-center gap-2 my-9">
+          <div className="flex justify-center gap-2 my-9 whitespace-nowrap">
             <Animated
               progress={progress}
               animations={[

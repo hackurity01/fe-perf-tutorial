@@ -15,7 +15,7 @@ function Scene2({ height }: { height: number }) {
           <>
             <Animated
               progress={progress}
-              className="fixed z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              className="fixed w-full text-center z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               animations={[
                 {
                   prop: "opacity",
@@ -33,7 +33,7 @@ function Scene2({ height }: { height: number }) {
 
             <Animated
               progress={progress}
-              className="fixed z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              className="fixed w-full text-center z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               animations={[
                 {
                   prop: "opacity",
@@ -46,7 +46,7 @@ function Scene2({ height }: { height: number }) {
                   tweenFn: animation.easeInOutQuad,
                 },
               ]}>
-              <Picture src={img1} />
+              <Picture src={img1} className="w-[50%] m-auto" />
               <br />
               <br />
               <Text text={"개발하는 남자와"} />
@@ -54,7 +54,7 @@ function Scene2({ height }: { height: number }) {
 
             <Animated
               progress={progress}
-              className="fixed z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              className="fixed w-full text-center z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               animations={[
                 {
                   prop: "opacity",
@@ -67,7 +67,7 @@ function Scene2({ height }: { height: number }) {
                   tweenFn: animation.easeInOutQuad,
                 },
               ]}>
-              <Picture src={img2} />
+              <Picture src={img2} className="w-[50%] m-auto" />
               <br />
               <br />
               <Text text={"디자인하는 여자가 만났습니다."} />
