@@ -9,12 +9,14 @@ import Scene8 from "./scenes/Scene8";
 import ScenePhotos from "./scenes/ScenePhotos";
 import SceneMap from "./scenes/SceneMap";
 import SceneInfo from "./scenes/SceneInfo";
+import ScrollDistance from "./components/ScrollDistance";
 
 function App() {
   const h = typeof window !== "undefined" ? window.innerHeight : 0;
 
   return (
     <>
+      <ScrollDistance />
       <Scene1 height={h} />
       <Scene2 height={2400} />
       <Scene3 height={2400} />
