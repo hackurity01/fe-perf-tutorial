@@ -16,6 +16,9 @@ function Products() {
     queryFn: () => getProducts({ query }),
   });
 
+  const modalProduct = rows.find((p) => p.id === editProductId) ?? null;
+
+  // 불필요한 useEffect
   useEffect(() => {
     if (!rows.length) return;
 
@@ -25,20 +28,11 @@ function Products() {
     });
   }, [rows]);
 
-  // 수정 버튼 클릭 시
   const handleEdit = (id: number) => {
     setEditProductId(id);
     setDrawerOpen(true);
   };
 
-  // 저장
-  const handleSave = () => {
-    // Normally, you would update the server and refetch, but for now just close the drawer
-    setDrawerOpen(false);
-    setEditProductId(null);
-  };
-
-  // Drawer 닫기
   const handleCloseDrawer = () => {
     setDrawerOpen(false);
     setEditProductId(null);
@@ -64,54 +58,52 @@ function Products() {
         <table className="min-w-full text-sm">
           <thead className="bg-gray-100">
             <tr>
+              <th className="px-3 py-2 text-left">수정</th>
               <th className="px-3 py-2 text-left">ID</th>
-              <th className="px-3 py-2 text-left whitespace-nowrap">이미지</th>
               <th className="px-3 py-2 text-left">상품명</th>
               <th className="px-3 py-2 text-left">설명</th>
               <th className="px-3 py-2 text-left">가격</th>
               <th className="px-3 py-2 text-left">재고</th>
-              <th className="px-3 py-2 text-left">수정</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((p) => (
-              <tr key={p.id} className="even:bg-gray-50">
-                <td className="px-3 py-1 whitespace-nowrap">{p.id}</td>
-                <td className="px-3 py-1 whitespace-nowrap">
-                  <img
-                    src={p.image}
-                    alt={p.name}
-                    className="w-12 h-12 object-cover rounded"
-                  />
-                </td>
-                <td className="px-3 py-1 whitespace-nowrap">{p.name}</td>
-                <td className="px-3 py-1 whitespace-nowrap">{p.description}</td>
-                <td className="px-3 py-1 whitespace-nowrap">{p.price}</td>
-                <td className="px-3 py-1 whitespace-nowrap">{p.stock}</td>
-                <td className="px-3 py-1 whitespace-nowrap">
-                  <button
-                    className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-                    onClick={() => handleEdit(p.id)}>
-                    수정
-                  </button>
-                </td>
-              </tr>
+              <ProductRow key={p.id} product={p} onEdit={handleEdit} />
             ))}
           </tbody>
         </table>
       </div>
-      {/* Drawer for edit */}
       <ProductDrawer
+        initialData={modalProduct}
         open={drawerOpen}
         onClose={handleCloseDrawer}
-        initialData={
-          editProductId
-            ? rows.find((p) => p.id === editProductId) || null
-            : null
-        }
-        onSave={handleSave}
+        onSave={handleCloseDrawer}
       />
     </div>
+  );
+}
+
+interface ProductRowProps {
+  product: Product;
+  onEdit: (id: number) => void;
+}
+
+function ProductRow({ product, onEdit }: ProductRowProps) {
+  return (
+    <tr className="even:bg-gray-50">
+      <td className="px-3 py-1 whitespace-nowrap">
+        <button
+          className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={() => onEdit(product.id)}>
+          수정
+        </button>
+      </td>
+      <td className="px-3 py-1 whitespace-nowrap">{product.id}</td>
+      <td className="px-3 py-1 whitespace-nowrap">{product.name}</td>
+      <td className="px-3 py-1 whitespace-nowrap">{product.description}</td>
+      <td className="px-3 py-1 whitespace-nowrap">{product.price}</td>
+      <td className="px-3 py-1 whitespace-nowrap">{product.stock}</td>
+    </tr>
   );
 }
 

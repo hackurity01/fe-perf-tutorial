@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getUsers } from "@/data/mockData";
-import ProgressBar from "@/components/ProgressBar";
 import type { User } from "@/types";
+import UserTable from "@/components/UserTable";
 
 const roles = ["All", "Admin", "Manager", "User", "Guest"];
 
-function UserList() {
+function Users() {
   const [query, setQuery] = useState("");
   const [role, setRole] = useState("All");
   const [filtered, setFiltered] = useState<User[]>([]);
@@ -16,15 +16,17 @@ function UserList() {
     queryFn: getUsers,
   });
 
+  // 불필요한 useEffect
   useEffect(() => {
     if (!users) return;
 
     setFiltered(
-      users.filter(
-        (u) =>
+      users.filter((u) => {
+        return (
           u.name.toLowerCase().includes(query.toLowerCase()) ||
           u.email.toLowerCase().includes(query.toLowerCase())
-      )
+        );
+      })
     );
   }, [users, query, role]);
 
@@ -52,36 +54,7 @@ function UserList() {
           {isLoading ? "로딩 중..." : `총 ${filtered.length}명`}
         </span>
       </div>
-      <div className="overflow-auto border rounded shadow">
-        <table className="min-w-full text-sm">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-3 py-2 text-left">ID</th>
-              <th className="px-3 py-2 text-left">이름</th>
-              <th className="px-3 py-2 text-left">이메일</th>
-              <th className="px-3 py-2 text-left w-[200px]">평가점수</th>
-              <th className="px-3 py-2 text-left">권한</th>
-              <th className="px-3 py-2 text-left">주소</th>
-              <th className="px-3 py-2 text-left">나이</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((u) => (
-              <tr key={u.id} className="even:bg-gray-50">
-                <td className="px-3 py-1 whitespace-nowrap">{u.id}</td>
-                <td className="px-3 py-1 whitespace-nowrap">{u.name}</td>
-                <td className="px-3 py-1 whitespace-nowrap">{u.email}</td>
-                <td className="px-3 py-1 whitespace-nowrap">
-                  <ProgressBar value={u.reviewScore} />
-                </td>
-                <td className="px-3 py-1 whitespace-nowrap">{u.role}</td>
-                <td className="px-3 py-1 whitespace-nowrap">{u.address}</td>
-                <td className="px-3 py-1 whitespace-nowrap">{u.age}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <UserTable users={filtered} />
       <p className="mt-4 text-xs text-gray-400">
         ※ 5,000명 전체 DOM 렌더 (가상화 미적용)
       </p>
@@ -89,4 +62,4 @@ function UserList() {
   );
 }
 
-export default UserList;
+export default Users;

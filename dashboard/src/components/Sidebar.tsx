@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import Search, { type SearchResult } from "./Search";
 
 function Sidebar() {
   const links = [
@@ -7,6 +8,11 @@ function Sidebar() {
     { to: "/analytics", label: "Analytics" },
     { to: "/settings", label: "Settings" },
   ];
+
+  const handleSearchSelect = (suggestion: SearchResult) => {
+    console.log("Selected:", suggestion);
+  };
+
   return (
     <aside className="bg-gray-800 text-white w-full min-h-screen flex flex-col p-6">
       <div className="mb-8">
@@ -15,13 +21,9 @@ function Sidebar() {
             Dashboard
           </div>
         </NavLink>
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full px-3 py-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6"
-        />
+        <Search onSelect={handleSearchSelect} />
       </div>
-      <nav className="flex-1">
+      <nav className="flex-1 mt-4">
         <ul className="flex flex-col space-y-2">
           {links.map((l) => (
             <li key={l.to}>

@@ -4,8 +4,9 @@ import { faker } from "@faker-js/faker";
 export const getUsers = (): Promise<User[]> =>
   new Promise((resolve) => {
     setTimeout(() => {
+      console.info("[Network] getUsers");
       resolve(
-        Array.from({ length: 40 }, (_, i) => ({
+        Array.from({ length: 1000 }, (_, i) => ({
           id: i + 1,
           name: faker.person.fullName(),
           email: faker.internet.email(),
@@ -21,6 +22,7 @@ export const getUsers = (): Promise<User[]> =>
 export const getChartsData = (): Promise<ChartData[]> =>
   new Promise((resolve) => {
     setTimeout(() => {
+      console.info("[Network] getChartsData");
       resolve(
         Array.from({ length: 10000 }, (_, i) => ({
           date: new Date(2025, 0, 1 + (i % 365)).toISOString().slice(0, 10),
@@ -33,6 +35,7 @@ export const getChartsData = (): Promise<ChartData[]> =>
 export const getProducts = ({ query }: { query: string }): Promise<Product[]> =>
   new Promise((resolve) => {
     setTimeout(() => {
+      console.info("[Network] getProducts");
       let data = Array.from({ length: 1000 }, (_, i) => ({
         id: i + 1,
         name: faker.commerce.productName(),

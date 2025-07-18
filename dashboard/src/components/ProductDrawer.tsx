@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Drawer from "./Drawer";
 import type { Product } from "@/types";
 
@@ -19,7 +19,8 @@ function ProductDrawer({
 }: ProductDrawerProps) {
   const [form, setForm] = useState<Product | null>(initialData);
 
-  React.useEffect(() => {
+  // 불필요한 useEffect
+  useEffect(() => {
     setForm(initialData);
   }, [initialData]);
 
