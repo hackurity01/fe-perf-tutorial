@@ -31,7 +31,7 @@ function ProductCard({ product }: ProductCardProps) {
       </div>
       <button
         onClick={handleAddToCart}
-        className="bg-gray-900 text-white rounded-md px-6 py-2 font-semibold text-base hover:bg-blue-700 transition">
+        className="bg-gray-900 text-white rounded-md px-6 py-2 font-semibold text-base hover:bg-gray-700 transition">
         장바구니에 추가
       </button>
     </div>
