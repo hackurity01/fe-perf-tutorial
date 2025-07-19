@@ -13,15 +13,11 @@ function Banner() {
     queryFn: fetchBanner,
   });
 
-  if (!banner) return null;
-
   return (
-    <div className="w-full bg-[#1a2a3a] flex justify-center items-center mb-14">
-      <img
-        src={banner?.banner}
-        alt="Event Banner"
-        className="block w-full max-w-[800px]"
-      />
+    <div className="w-full bg-[#1a2a3a] flex justify-center items-center mb-14 h-[500px]">
+      {banner && (
+        <img src={banner?.banner} alt="Event Banner" className="block h-full" />
+      )}
     </div>
   );
 }
