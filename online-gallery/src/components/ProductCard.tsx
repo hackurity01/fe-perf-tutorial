@@ -45,9 +45,11 @@ function ProductCard({ product }: ProductCardProps) {
     <div className="bg-white rounded-xl shadow-md border border-gray-100 flex flex-col items-center p-4 w-72 m-2 transition hover:shadow-lg">
       <img
         src={`${product.imageUrl}${getParametersForUnsplash({
-          width: 1800,
-          quality: 100,
-          format: "png",
+          width: 488,
+          height: 488,
+          quality: 60,
+          format: "webp",
+          fit: "crop",
         })}`}
         alt={product.name}
         className="w-56 h-56 object-cover rounded-lg mb-3"
