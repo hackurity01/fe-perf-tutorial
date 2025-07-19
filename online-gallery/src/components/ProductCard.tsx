@@ -19,8 +19,8 @@ function getParametersForUnsplash({
   width?: number;
   height?: number;
   quality?: number;
-  format?: string;
-  fit?: string;
+  format?: "png" | "jpg" | "webp";
+  fit?: "fill" | "clip" | "crop" | "face" | "scale";
 }): string {
   const params = [];
 
