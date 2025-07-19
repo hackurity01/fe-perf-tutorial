@@ -20,8 +20,7 @@ function Banner() {
       <img
         src={banner?.banner}
         alt="Event Banner"
-        className="w-full max-w-[800px] object-cover object-center"
-        style={{ display: "block" }}
+        className="block w-full max-w-[800px]"
       />
     </div>
   );
