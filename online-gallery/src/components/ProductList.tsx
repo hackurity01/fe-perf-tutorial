@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import type { Product } from "@/types/product";
 import ProductCard from "./ProductCard";
-import { slowFilterAndSort } from "../utils/slowFilterAndSort";
+import { filterAndSort } from "@/utils/filterAndSort";
 
 const fetchProducts = async (): Promise<Product[]> => {
   const res = await fetch("/api/products.json");
@@ -37,7 +37,7 @@ function ProductList({ search }: ProductListProps) {
     );
   }
 
-  const filteredProducts = slowFilterAndSort(products ?? [], search);
+  const filteredProducts = filterAndSort(products ?? [], search);
 
   return (
     <div className="max-w-7xl mx-auto py-4 px-4">

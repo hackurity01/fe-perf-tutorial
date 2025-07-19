@@ -1,6 +1,6 @@
 import type { Product } from "../types/product";
 
-export function slowFilterAndSort(products: Product[], search: string) {
+export function filterAndSort(products: Product[], search: string) {
   performance.mark("start");
   // 1. 거대한 배열 복사를 여러번 수행 (더 많이!)
   let list = JSON.parse(JSON.stringify(products)); // deep clone
