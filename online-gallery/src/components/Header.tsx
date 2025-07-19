@@ -2,6 +2,15 @@ import { Link } from "react-router-dom";
 import Banner from "./Banner";
 import { useCart } from "../contexts/CartContext";
 
+let isCartPagePreloaded = false;
+
+const preloadCartPage = () => {
+  if (!isCartPagePreloaded) {
+    isCartPagePreloaded = true;
+    import("../pages/CartPage");
+  }
+};
+
 function Header() {
   const { cart } = useCart();
 
@@ -13,6 +22,7 @@ function Header() {
         </Link>
         <Link
           to="/cart"
+          onMouseEnter={preloadCartPage}
           className="relative p-2 text-gray-600 hover:text-blue-600 transition-colors">
           <span className="text-2xl">🛒</span>
           {cart.totalItems > 0 && (
