@@ -2,8 +2,8 @@ import { Scene } from "../components/Scene";
 import { animation } from "../utils/animation";
 import { Animated } from "../components/Animated";
 import { Text } from "../components/Text";
-import img1 from "../assets/imgs/section2/section2-1.jpg";
-import img2 from "../assets/imgs/section2/section2-2.jpg";
+import img1 from "../assets/imgs/section2-1.jpg";
+import img2 from "../assets/imgs/section2-2.jpg";
 import { Picture } from "../components/Picture";
 
 function Scene2({ height }: { height: number }) {

@@ -3,7 +3,7 @@ import { animation } from "../utils/animation";
 import { Animated } from "../components/Animated";
 import { Text } from "../components/Text";
 import { Picture } from "../components/Picture";
-import img1 from "../assets/imgs/section4/section4-1.jpg";
+import img1 from "../assets/imgs/section4-1.jpg";
 
 function Scene4({ height }: { height: number }) {
   return (

@@ -6,12 +6,12 @@ import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Text } from "../components/Text";
 
-import photo1 from "../assets/imgs/photos/photo-1.jpg";
-import photo2 from "../assets/imgs/photos/photo-2.jpg";
-import photo3 from "../assets/imgs/photos/photo-3.jpg";
-import photo4 from "../assets/imgs/photos/photo-4.jpg";
-import photo5 from "../assets/imgs/photos/photo-5.jpg";
-import photo6 from "../assets/imgs/photos/photo-6.jpg";
+import photo1 from "../assets/imgs/photo-1.jpg";
+import photo2 from "../assets/imgs/photo-2.jpg";
+import photo3 from "../assets/imgs/photo-3.jpg";
+import photo4 from "../assets/imgs/photo-4.jpg";
+import photo5 from "../assets/imgs/photo-5.jpg";
+import photo6 from "../assets/imgs/photo-6.jpg";
 
 const photos = [photo1, photo2, photo3, photo4, photo5, photo6];
 
