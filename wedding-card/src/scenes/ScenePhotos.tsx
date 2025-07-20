@@ -2,9 +2,8 @@
 // @ts-ignore
 import "swiper/css";
 
-import { useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Text } from "../components/Text";
-import SwipeView from "../components/SwipeView";
 
 import photo1 from "../assets/imgs/photo-1.webp";
 import photo2 from "../assets/imgs/photo-2.webp";
@@ -13,11 +12,28 @@ import photo4 from "../assets/imgs/photo-4.webp";
 import photo5 from "../assets/imgs/photo-5.webp";
 import photo6 from "../assets/imgs/photo-6.webp";
 
+const SwipeView = lazy(() => import("../components/SwipeView"));
+let isSwiperViewLoaded = false;
+
 const photos = [photo1, photo2, photo3, photo4, photo5, photo6];
 
 export default function ScenePhotos() {
   const [swiperOpen, setSwiperOpen] = useState(false);
   const [swiperIndex, setSwiperIndex] = useState(0);
+
+  useEffect(() => {
+    if (isSwiperViewLoaded) return;
+    isSwiperViewLoaded = true;
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(() => {
+        import("../components/SwipeView");
+      });
+    } else {
+      setTimeout(() => {
+        import("../components/SwipeView");
+      }, 1);
+    }
+  }, []);
 
   return (
     <section className="relative z-[1000] py-[90px] max-w-[500px] mx-auto">
@@ -46,13 +62,16 @@ export default function ScenePhotos() {
       <div className="text-[#666] text-[0.78rem] pt-5 text-center">
         *사진을 클릭하시면 크게 볼 수 있어요!
       </div>
-      {swiperOpen && (
-        <SwipeView
-          onClose={() => setSwiperOpen(false)}
-          photos={photos}
-          initialIndex={swiperIndex}
-        />
-      )}
+
+      <Suspense fallback={<div>Loading...</div>}>
+        {swiperOpen && (
+          <SwipeView
+            onClose={() => setSwiperOpen(false)}
+            photos={photos}
+            initialIndex={swiperIndex}
+          />
+        )}
+      </Suspense>
     </section>
   );
 }
