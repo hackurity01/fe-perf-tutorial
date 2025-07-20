@@ -1,6 +1,6 @@
 function SceneInfo() {
   return (
-    <div className="px-8 pt-10 pb-24 text-left max-w-xl mx-auto">
+    <div className="relative z-[1000] px-8 pt-10 pb-24 text-left max-w-xl mx-auto">
       <div className="mb-8 relative">
         <div className="text-lg leading-6 font-medium mb-1">시내버스</div>
         <div className="text-sm leading-7">

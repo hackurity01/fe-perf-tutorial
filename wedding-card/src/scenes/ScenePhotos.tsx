@@ -20,12 +20,12 @@ export default function ScenePhotos() {
   const [swiperIndex, setSwiperIndex] = useState(0);
 
   return (
-    <section className="py-[90px] max-w-[500px] mx-auto">
+    <section className="relative z-[1000] py-[90px] max-w-[500px] mx-auto">
       <Text
         text="우리들의 사진"
         color="#000"
-        className="text-2xl text-center block"
         noShadow
+        className="text-2xl text-center block"
       />
       {/* 썸네일 그리드 */}
       <div className="pt-[60px] px-5 w-full mx-auto mb-[40px] box-border">
@@ -33,12 +33,8 @@ export default function ScenePhotos() {
           {photos.map((src, i) => (
             <div
               key={i}
-              className="w-full flex justify-center aspect-square overflow-hidden"
-              style={{
-                backgroundImage: `url(${src})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
+              className="w-full flex justify-center aspect-square overflow-hidden cursor-pointer bg-cover bg-center"
+              style={{ backgroundImage: `url(${src})` }}
               onClick={() => {
                 setSwiperIndex(i);
                 setSwiperOpen(true);

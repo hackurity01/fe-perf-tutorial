@@ -27,7 +27,7 @@ function SceneMap() {
   }, []);
 
   return (
-    <section className="max-w-[500px] mx-auto pt-24">
+    <section className="relative z-[100] max-w-[500px] mx-auto pt-24">
       <h2 className="text-xl mb-2">오시는 길</h2>
       <div
         id="daumRoughmapContainer1752412797492"
