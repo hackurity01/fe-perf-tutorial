@@ -15,12 +15,7 @@ function Scene3({ height }: { height: number }) {
           {/* Image 1 */}
           <Animated
             progress={progress}
-            className="fixed z-10 boxShadow"
-            style={{
-              width: "75%",
-              maxWidth: "375px",
-              transformOrigin: "center bottom",
-            }}
+            className="fixed z-10 boxShadow w-[75%] max-w-[375px] origin-bottom left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
             animations={[
               {
                 prop: "opacity",
@@ -50,18 +45,18 @@ function Scene3({ height }: { height: number }) {
                 tweenFn: animation.easeInOutQuad,
               },
               {
-                prop: "left",
+                prop: "translateX",
                 keyframes: [
-                  [0.0, 20],
-                  [0.95, 19],
+                  [0.0, -30],
+                  [0.95, -31],
                 ],
                 unit: "%",
               },
               {
-                prop: "top",
+                prop: "translateY",
                 keyframes: [
-                  [0.0, 43],
-                  [0.95, 42],
+                  [0.0, -7],
+                  [0.95, -8],
                 ],
                 unit: "%",
               },
@@ -72,12 +67,7 @@ function Scene3({ height }: { height: number }) {
           {/* Image 2 */}
           <Animated
             progress={progress}
-            className="fixed z-10 boxShadow"
-            style={{
-              width: "75%",
-              maxWidth: "375px",
-              transformOrigin: "center bottom",
-            }}
+            className="fixed z-10 boxShadow w-[75%] max-w-[375px] origin-bottom left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
             animations={[
               {
                 prop: "opacity",
@@ -108,22 +98,17 @@ function Scene3({ height }: { height: number }) {
               },
               {
                 prop: "translateX",
-                keyframes: [[0, -50]],
-                unit: "%",
-              },
-              {
-                prop: "left",
                 keyframes: [
-                  [0.2, 54],
-                  [0.95, 55],
+                  [0.2, 4],
+                  [0.95, 5],
                 ],
                 unit: "%",
               },
               {
-                prop: "top",
+                prop: "translateY",
                 keyframes: [
-                  [0.2, 33],
-                  [0.95, 32],
+                  [0.2, -17],
+                  [0.95, -18],
                 ],
                 unit: "%",
               },
@@ -134,12 +119,7 @@ function Scene3({ height }: { height: number }) {
           {/* Image 3 */}
           <Animated
             progress={progress}
-            className="fixed z-10 boxShadow"
-            style={{
-              width: "65%",
-              maxWidth: "365px",
-              transformOrigin: "left bottom",
-            }}
+            className="fixed z-10 boxShadow w-[65%] max-w-[365px] origin-left left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
             animations={[
               {
                 prop: "opacity",
@@ -169,18 +149,18 @@ function Scene3({ height }: { height: number }) {
                 tweenFn: animation.easeInOutQuad,
               },
               {
-                prop: "left",
+                prop: "translateX",
                 keyframes: [
-                  [0.4, 48],
-                  [0.95, 50],
+                  [0.4, -2],
+                  [0.95, 0],
                 ],
                 unit: "%",
               },
               {
-                prop: "top",
+                prop: "translateY",
                 keyframes: [
-                  [0.4, 42],
-                  [0.95, 41],
+                  [0.4, -8],
+                  [0.95, -9],
                 ],
                 unit: "%",
               },
