@@ -1,4 +1,10 @@
-import { type RefObject, useCallback, useEffect, useState } from "react";
+import {
+  type RefObject,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useScrollY } from "./useScrollY";
 
 export function useSceneProgress<T extends Element>(
@@ -6,15 +12,15 @@ export function useSceneProgress<T extends Element>(
   height: number,
   initialProgress: number = -10
 ): number {
-  const [sceneTop, setSceneTop] = useState(0);
+  const sceneTopRef = useRef(0);
   const [prog, setProg] = useState(initialProgress);
   useScrollY(
     useCallback(
       (y: number) => {
-        const raw = (y - sceneTop) / height;
+        const raw = (y - sceneTopRef.current) / height;
         setProg(raw);
       },
-      [sceneTop, height]
+      [height]
     )
   );
 
@@ -25,7 +31,7 @@ export function useSceneProgress<T extends Element>(
 
     const measure = () => {
       const rect = ref.current!.getBoundingClientRect();
-      setSceneTop(rect.top + window.scrollY);
+      sceneTopRef.current = rect.top + window.scrollY;
     };
     measure();
     window.addEventListener("resize", measure);
