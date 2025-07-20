@@ -1,18 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useScrollY(): number {
   const [scrollY, setScrollY] = useState(0);
-  const ticking = useRef(false);
 
   useEffect(() => {
     const onScroll = () => {
-      if (!ticking.current) {
-        window.requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
-          ticking.current = false;
-        });
-        ticking.current = true;
-      }
+      setScrollY(window.scrollY);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
