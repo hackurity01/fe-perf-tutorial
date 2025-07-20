@@ -1,5 +1,5 @@
 import { Scene } from "../components/Scene";
-import mainImg from "../assets/imgs/main.jpg";
+import mainImg from "../assets/imgs/main.webp";
 import { Picture } from "../components/Picture";
 
 function Scene1({ height }: { height: number }) {

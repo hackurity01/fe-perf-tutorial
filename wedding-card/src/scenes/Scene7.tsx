@@ -4,7 +4,7 @@ import { Animated } from "../components/Animated";
 import { Text } from "../components/Text";
 import { Picture } from "../components/Picture";
 
-import img1 from "../assets/imgs/section7-1.jpg";
+import img1 from "../assets/imgs/section7-1.webp";
 
 function Scene7({ height }: { height: number }) {
   return (
