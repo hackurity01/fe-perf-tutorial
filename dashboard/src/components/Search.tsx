@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "@/data/mockData";
 import type { Product } from "@/types";
+import { debounce } from "lodash";
 
 export interface SearchResult {
   type: "product";
@@ -14,13 +15,15 @@ interface SearchProps {
 }
 
 function Search({ onSelect }: SearchProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQueryInput, setSearchQueryInput] = useState("");
+  const [searchQuery, setSearchQuery] = useState(searchQueryInput);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["products", searchQuery],
     queryFn: () => getProducts({ query: searchQuery }),
+    gcTime: 1000,
   });
 
   const suggestions = searchQuery.length
@@ -30,6 +33,12 @@ function Search({ onSelect }: SearchProps) {
         displayText: `${product.name} - $${product.price}`,
       }))
     : [];
+
+  const debouncedHandleSearchQueryChange = useRef(
+    debounce((query: string) => {
+      setSearchQuery(query);
+    }, 300)
+  ).current;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -56,10 +65,11 @@ function Search({ onSelect }: SearchProps) {
       <input
         type="text"
         placeholder="Search products..."
-        value={searchQuery}
+        value={searchQueryInput}
         onChange={(e) => {
-          setSearchQuery(e.target.value);
+          setSearchQueryInput(e.target.value);
           setShowSuggestions(true);
+          debouncedHandleSearchQueryChange(e.target.value);
         }}
         onFocus={() => setShowSuggestions(true)}
         className="w-full px-3 py-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-2"
