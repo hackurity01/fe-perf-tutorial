@@ -18,12 +18,24 @@ declare global {
 
 function SceneMap() {
   useEffect(() => {
-    new window.daum.roughmap.Lander({
-      timestamp: "1752412797492",
-      key: "5k2nkmwe88t",
-      mapWidth: Math.min(500, window.innerWidth).toString(),
-      mapHeight: "360",
-    }).render();
+    const checkDaumRoughmap = () => {
+      if (window?.daum?.roughmap?.Lander) {
+        new window.daum.roughmap.Lander({
+          timestamp: "1752412797492",
+          key: "5k2nkmwe88t",
+          mapWidth: Math.min(500, window.innerWidth).toString(),
+          mapHeight: "360",
+        }).render();
+        return;
+      }
+
+      const timeoutId = setTimeout(checkDaumRoughmap, 2000);
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    };
+
+    return checkDaumRoughmap();
   }, []);
 
   return (
