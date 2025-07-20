@@ -6,8 +6,8 @@
   font-weight: 400;
   font-display: fallback;
   src: local("NanumMyeongjo"),
-    url("./assets/fonts/NanumMyeongjo.woff2") format("woff2"),
-    url("./assets/fonts/NanumMyeongjo.woff") format("woff");
+    url("./assets/fonts/subset-NanumMyeongjo.woff2") format("woff2"),
+    url("./assets/fonts/subset-NanumMyeongjo.woff") format("woff");
 }
 
 body {
