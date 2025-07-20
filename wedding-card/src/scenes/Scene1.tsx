@@ -3,6 +3,7 @@ import mainJpg from "../assets/imgs/main.jpg";
 import mainImg from "../assets/imgs/main.webp";
 import mainJpg1x from "../assets/imgs/main-1x.jpg";
 import mainImg1x from "../assets/imgs/main-1x.webp";
+import mainBlur from "../assets/imgs/main-blur.jpg";
 import Picture2 from "../components/Picture2";
 
 function Scene1({ height }: { height: number }) {
@@ -25,6 +26,7 @@ function Scene1({ height }: { height: number }) {
             <div className="w-full p-6">
               <Picture2
                 fallbackSrc={mainJpg}
+                blurSrc={mainBlur}
                 sources={{
                   webp: {
                     420: mainImg1x,

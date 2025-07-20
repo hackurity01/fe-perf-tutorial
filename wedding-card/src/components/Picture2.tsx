@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export interface ImageSource {
   src: string;
@@ -17,16 +17,20 @@ interface Picture2Props {
     };
   };
   fallbackSrc: string;
+  blurSrc?: string;
 }
 
 function Picture2({
   sources,
   fallbackSrc,
+  blurSrc,
   alt = "",
   style = {},
   className = "",
   onClick,
 }: Picture2Props) {
+  const [isImgLoaded, setIsImgLoaded] = useState(false);
+
   return (
     <div style={style} className={className}>
       <picture>
@@ -39,8 +43,25 @@ function Picture2({
             type={`image/${format}`}
           />
         ))}
-        <img src={fallbackSrc} alt={alt} onClick={onClick} />
+        <img
+          src={fallbackSrc}
+          alt={alt}
+          onClick={onClick}
+          onLoad={() => setIsImgLoaded(true)}
+          style={{
+            display: isImgLoaded ? "block" : "none",
+          }}
+        />
       </picture>
+      {!isImgLoaded && (
+        <img
+          src={blurSrc}
+          alt={alt}
+          onClick={onClick}
+          className="h-full w-full object-cover"
+          style={{ filter: "blur(5px)", opacity: 0.8 }}
+        />
+      )}
     </div>
   );
 }
