@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "@/data/mockData";
 import type { Product } from "@/types";
-import { debounce } from "lodash";
+import { debounce } from "lodash-es";
 
 export interface SearchResult {
   type: "product";

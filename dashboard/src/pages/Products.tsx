@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import ProductDrawer from "@/components/ProductDrawer";
 import type { Product } from "@/types";
-import { sumBy } from "lodash";
+import { sumBy } from "lodash-es";
 import { getProducts } from "@/data/mockData";
 import { useQuery } from "@tanstack/react-query";
 
