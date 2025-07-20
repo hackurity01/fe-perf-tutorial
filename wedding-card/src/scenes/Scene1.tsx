@@ -7,7 +7,7 @@ import Picture2 from "../components/Picture2";
 
 function Scene1({ height }: { height: number }) {
   return (
-    <Scene height={height}>
+    <Scene height={height} initProgress={0}>
       {() => {
         return (
           <div

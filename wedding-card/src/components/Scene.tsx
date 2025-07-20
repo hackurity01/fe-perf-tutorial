@@ -5,11 +5,17 @@ interface SceneProps {
   height: number;
   children?: (progress: number) => React.ReactNode;
   className?: string;
+  initProgress?: number;
 }
 
-export function Scene({ height, className, children }: SceneProps) {
+export function Scene({
+  initProgress,
+  height,
+  className,
+  children,
+}: SceneProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const progress = useSceneProgress(ref, height);
+  const progress = useSceneProgress(ref, height, initProgress);
 
   return (
     <div

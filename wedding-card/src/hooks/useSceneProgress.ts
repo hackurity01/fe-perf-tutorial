@@ -1,13 +1,22 @@
-import { type RefObject, useEffect, useState } from "react";
+import { type RefObject, useCallback, useEffect, useState } from "react";
 import { useScrollY } from "./useScrollY";
 
 export function useSceneProgress<T extends Element>(
   ref: RefObject<T | null>,
-  height: number
+  height: number,
+  initialProgress: number = -10
 ): number {
-  const scrollY = useScrollY();
   const [sceneTop, setSceneTop] = useState(0);
-  const [prog, setProg] = useState(0);
+  const [prog, setProg] = useState(initialProgress);
+  useScrollY(
+    useCallback(
+      (y: number) => {
+        const raw = (y - sceneTop) / height;
+        setProg(raw);
+      },
+      [sceneTop, height]
+    )
+  );
 
   useEffect(() => {
     if (!ref?.current) {
@@ -22,12 +31,6 @@ export function useSceneProgress<T extends Element>(
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
   }, [ref]);
-
-  // 스크롤에 따라 progress 계산
-  useEffect(() => {
-    const raw = (scrollY - sceneTop) / height;
-    setProg(raw);
-  }, [scrollY, sceneTop, height]);
 
   return prog;
 }
