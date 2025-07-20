@@ -1,20 +1,16 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
 interface SwipeViewProps {
-  isOpen: boolean;
   onClose: () => void;
   photos: string[];
   initialIndex: number;
 }
 
 export default function SwipeView({
-  isOpen,
   onClose,
   photos,
   initialIndex,
 }: SwipeViewProps) {
-  if (!isOpen) return null;
-
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex flex-col items-center justify-center">
       <button

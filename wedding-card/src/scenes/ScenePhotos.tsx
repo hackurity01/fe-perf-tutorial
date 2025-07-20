@@ -46,12 +46,13 @@ export default function ScenePhotos() {
       <div className="text-[#666] text-[0.78rem] pt-5 text-center">
         *사진을 클릭하시면 크게 볼 수 있어요!
       </div>
-      <SwipeView
-        isOpen={swiperOpen}
-        onClose={() => setSwiperOpen(false)}
-        photos={photos}
-        initialIndex={swiperIndex}
-      />
+      {swiperOpen && (
+        <SwipeView
+          onClose={() => setSwiperOpen(false)}
+          photos={photos}
+          initialIndex={swiperIndex}
+        />
+      )}
     </section>
   );
 }
