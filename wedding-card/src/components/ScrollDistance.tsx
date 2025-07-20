@@ -8,7 +8,7 @@ function useAccumulatedScrollDistanceWithHistory() {
     {
       timestamp: string;
       scrollValue: number;
-      largeArray: Date[];
+      whatIsThis: Date[];
     }[]
   >([]);
 
@@ -21,7 +21,7 @@ function useAccumulatedScrollDistanceWithHistory() {
         history.current.push({
           timestamp: new Date().toISOString(),
           scrollValue: next,
-          largeArray: new Array(50000).fill(new Date()),
+          whatIsThis: new Array(50000).fill(new Date()),
         });
         return next;
       });
