@@ -25,7 +25,7 @@ export function Scene({
         height,
       }}>
       <div className="max-w-[500px] m-auto h-full">
-        {-0.001 < progress && progress <= 1 ? children?.(progress) : null}
+        {-0.5 < progress && progress <= 1 ? children?.(progress) : null}
       </div>
     </div>
   );
