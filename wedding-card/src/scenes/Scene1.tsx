@@ -1,5 +1,6 @@
 import { Scene } from "../components/Scene";
 import mainImg from "../assets/imgs/main.jpg";
+import { Picture } from "../components/Picture";
 
 function Scene1({ height }: { height: number }) {
   return (
@@ -19,7 +20,7 @@ function Scene1({ height }: { height: number }) {
             </div>
 
             <div className="w-full p-6">
-              <img
+              <Picture
                 src={mainImg}
                 alt="웨딩 사진"
                 className="w-full object-cover"
