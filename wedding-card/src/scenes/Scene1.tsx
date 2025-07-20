@@ -1,7 +1,9 @@
 import { Scene } from "../components/Scene";
 import mainJpg from "../assets/imgs/main.jpg";
 import mainImg from "../assets/imgs/main.webp";
-import { Picture } from "../components/Picture";
+import mainJpg1x from "../assets/imgs/main-1x.jpg";
+import mainImg1x from "../assets/imgs/main-1x.webp";
+import Picture2 from "../components/Picture2";
 
 function Scene1({ height }: { height: number }) {
   return (
@@ -21,9 +23,18 @@ function Scene1({ height }: { height: number }) {
             </div>
 
             <div className="w-full p-6">
-              <Picture
-                src={mainImg}
-                jpg={mainJpg}
+              <Picture2
+                fallbackSrc={mainJpg}
+                sources={{
+                  webp: {
+                    420: mainImg1x,
+                    1040: mainImg,
+                  },
+                  jpg: {
+                    420: mainJpg1x,
+                    1040: mainJpg,
+                  },
+                }}
                 alt="웨딩 사진"
                 className="w-full object-cover"
               />
