@@ -21,8 +21,15 @@ function Search({ onSelect }: SearchProps) {
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["products", searchQuery],
     queryFn: () => getProducts({ query: searchQuery }),
-    staleTime: 5 * 60 * 1000, // 5 minutes
   });
+
+  const suggestions = searchQuery.length
+    ? products.slice(0, 10).map((product) => ({
+        type: "product" as const,
+        data: product,
+        displayText: `${product.name} - $${product.price}`,
+      }))
+    : [];
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -37,14 +44,6 @@ function Search({ onSelect }: SearchProps) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const suggestions = searchQuery.length
-    ? products.slice(0, 10).map((product) => ({
-        type: "product" as const,
-        data: product,
-        displayText: `${product.name} - $${product.price}`,
-      }))
-    : [];
 
   const handleSuggestionClick = (suggestion: SearchResult) => {
     setSearchQuery(suggestion.displayText);
