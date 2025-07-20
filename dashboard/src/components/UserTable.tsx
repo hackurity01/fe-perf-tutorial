@@ -1,46 +1,64 @@
 import ProgressBar from "@/components/ProgressBar";
 import type { User } from "@/types";
+import { FixedSizeList } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 
 function UserTable({ users }: { users: User[] }) {
   return (
-    <div className="overflow-auto border rounded shadow">
-      <table className="min-w-full text-sm">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="px-3 py-2 text-left">ID</th>
-            <th className="px-3 py-2 text-left">이름</th>
-            <th className="px-3 py-2 text-left">이메일</th>
-            <th className="px-3 py-2 text-left min-w-[200px]">평가점수</th>
-            <th className="px-3 py-2 text-left">권한</th>
-            <th className="px-3 py-2 text-left">주소</th>
-            <th className="px-3 py-2 text-left">나이</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((u) => (
-            <UserRow key={u.id} user={u} />
-          ))}
-        </tbody>
-      </table>
+    <div className="border rounded shadow h-full">
+      <div className="bg-gray-100 flex items-center font-semibold text-sm">
+        <div className="px-3 py-2 w-16">ID</div>
+        <div className="px-3 py-2 w-32">이름</div>
+        <div className="px-3 py-2 w-48">이메일</div>
+        <div className="px-3 py-2 w-48">평가점수</div>
+        <div className="px-3 py-2 w-24">권한</div>
+        <div className="px-3 py-2 w-48">주소</div>
+        <div className="px-3 py-2 w-16">나이</div>
+      </div>
+
+      <AutoSizer>
+        {({ height, width }) => (
+          <FixedSizeList
+            height={height - 40}
+            itemCount={users.length}
+            itemSize={40}
+            width={width}
+            overscanCount={50}>
+            {({ index, style }) => (
+              <UserRow user={users[index]} style={style} />
+            )}
+          </FixedSizeList>
+        )}
+      </AutoSizer>
     </div>
   );
 }
 
-function UserRow({ user }: { user: User }) {
+function UserRow({ style, user }: { user: User; style: React.CSSProperties }) {
   return (
-    <tr className="even:bg-gray-50">
-      <td className="px-3 py-1 whitespace-nowrap">{user.id}</td>
-      <td className="px-3 py-1 whitespace-nowrap">
+    <div style={style} className="flex items-center border-b">
+      <div className="px-3 py-1 whitespace-nowrap w-16 text-ellipsis overflow-hidden">
+        {user.id}
+      </div>
+      <div className="px-3 py-1 whitespace-nowrap w-32 text-ellipsis overflow-hidden">
         {user.firstName} {user.lastName}
-      </td>
-      <td className="px-3 py-1 whitespace-nowrap">{user.email}</td>
-      <td className="px-3 py-1 whitespace-nowrap">
+      </div>
+      <div className="px-3 py-1 whitespace-nowrap w-48 text-ellipsis overflow-hidden">
+        {user.email}
+      </div>
+      <div className="px-3 py-1 whitespace-nowrap w-48 text-ellipsis overflow-hidden">
         <ProgressBar value={user.reviewScore} />
-      </td>
-      <td className="px-3 py-1 whitespace-nowrap">{user.role}</td>
-      <td className="px-3 py-1 whitespace-nowrap">{user.address}</td>
-      <td className="px-3 py-1 whitespace-nowrap">{user.age}</td>
-    </tr>
+      </div>
+      <div className="px-3 py-1 whitespace-nowrap w-24 text-ellipsis overflow-hidden">
+        {user.role}
+      </div>
+      <div className="px-3 py-1 whitespace-nowrap w-48 text-ellipsis overflow-hidden">
+        {user.address}
+      </div>
+      <div className="px-3 py-1 whitespace-nowrap w-16 text-ellipsis overflow-hidden">
+        {user.age}
+      </div>
+    </div>
   );
 }
 
