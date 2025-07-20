@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { startTransition, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getUsers } from "@/data/mockData";
 import type { User } from "@/types";
@@ -7,6 +7,7 @@ import UserTable from "@/components/UserTable";
 const roles = ["All", "Admin", "Manager", "User", "Guest"];
 
 function Users() {
+  const [queryInput, setQueryInput] = useState("");
   const [query, setQuery] = useState("");
   const [role, setRole] = useState("All");
 
@@ -15,14 +16,17 @@ function Users() {
     queryFn: getUsers,
   });
 
-  const filtered =
-    users?.filter((u) => {
-      return (
-        u.firstName.toLowerCase().includes(query.toLowerCase()) ||
-        u.lastName.toLowerCase().includes(query.toLowerCase()) ||
-        u.email.toLowerCase().includes(query.toLowerCase())
-      );
-    }) ?? [];
+  const filtered = useMemo(
+    () =>
+      users?.filter((u) => {
+        return (
+          u.firstName.toLowerCase().includes(query.toLowerCase()) ||
+          u.lastName.toLowerCase().includes(query.toLowerCase()) ||
+          u.email.toLowerCase().includes(query.toLowerCase())
+        );
+      }) ?? [],
+    [users, query]
+  );
 
   return (
     <div className="max-w-7xl mx-auto h-full p-6 flex flex-col">
@@ -32,8 +36,13 @@ function Users() {
           <input
             className="border rounded px-3 py-2 w-full md:w-64"
             placeholder="검색 (이름, 이메일)"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={queryInput}
+            onChange={(e) => {
+              setQueryInput(e.target.value);
+              startTransition(() => {
+                setQuery(e.target.value);
+              });
+            }}
           />
           <select
             className="border rounded px-3 py-2 w-full md:w-48"

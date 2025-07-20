@@ -2,6 +2,7 @@ import ProgressBar from "@/components/ProgressBar";
 import type { User } from "@/types";
 import { FixedSizeList } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
+import { memo } from "react";
 
 function UserTable({ users }: { users: User[] }) {
   return (
@@ -62,4 +63,4 @@ function UserRow({ style, user }: { user: User; style: React.CSSProperties }) {
   );
 }
 
-export default UserTable;
+export default memo(UserTable);
