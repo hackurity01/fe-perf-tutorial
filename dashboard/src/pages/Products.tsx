@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import ProductDrawer from "@/components/ProductDrawer";
 import type { Product } from "@/types";
 import { sumBy } from "lodash";
@@ -9,7 +9,6 @@ function Products() {
   const [query, setQuery] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [editProductId, setEditProductId] = useState<number | null>(null);
-  const [summary, setSummary] = useState({ total: 0, inStock: 0 });
 
   const { data: rows = [], isLoading } = useQuery<Product[]>({
     queryKey: ["products", query],
@@ -18,15 +17,13 @@ function Products() {
 
   const modalProduct = rows.find((p) => p.id === editProductId) ?? null;
 
-  // 불필요한 useEffect
-  useEffect(() => {
-    if (!rows.length) return;
-
-    setSummary({
+  const summary = useMemo(
+    () => ({
       total: rows.length,
       inStock: sumBy(rows, (p: Product) => (p.stock > 0 ? 1 : 0)),
-    });
-  }, [rows]);
+    }),
+    [rows]
+  );
 
   const handleEdit = (id: number) => {
     setEditProductId(id);
@@ -74,6 +71,7 @@ function Products() {
         </table>
       </div>
       <ProductDrawer
+        key={modalProduct?.id}
         initialData={modalProduct}
         open={drawerOpen}
         onClose={handleCloseDrawer}

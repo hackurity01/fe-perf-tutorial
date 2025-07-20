@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Drawer from "./Drawer";
 import type { Product } from "@/types";
 
@@ -18,11 +18,6 @@ function ProductDrawer({
   title = "상품 수정",
 }: ProductDrawerProps) {
   const [form, setForm] = useState<Product | null>(initialData);
-
-  // 불필요한 useEffect
-  useEffect(() => {
-    setForm(initialData);
-  }, [initialData]);
 
   const handleFormChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
