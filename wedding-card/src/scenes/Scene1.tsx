@@ -1,4 +1,5 @@
 import { Scene } from "../components/Scene";
+import mainJpg from "../assets/imgs/main.jpg";
 import mainImg from "../assets/imgs/main.webp";
 import { Picture } from "../components/Picture";
 
@@ -22,6 +23,7 @@ function Scene1({ height }: { height: number }) {
             <div className="w-full p-6">
               <Picture
                 src={mainImg}
+                jpg={mainJpg}
                 alt="웨딩 사진"
                 className="w-full object-cover"
               />

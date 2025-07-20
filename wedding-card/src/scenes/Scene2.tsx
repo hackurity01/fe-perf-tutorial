@@ -4,6 +4,8 @@ import { Animated } from "../components/Animated";
 import { Text } from "../components/Text";
 import img1 from "../assets/imgs/section2-1.webp";
 import img2 from "../assets/imgs/section2-2.webp";
+import img1Jpg from "../assets/imgs/section2-1.jpg";
+import img2Jpg from "../assets/imgs/section2-2.jpg";
 import { Picture } from "../components/Picture";
 
 function Scene2({ height }: { height: number }) {
@@ -46,7 +48,7 @@ function Scene2({ height }: { height: number }) {
                   tweenFn: animation.easeInOutQuad,
                 },
               ]}>
-              <Picture src={img1} className="w-[50%] m-auto" />
+              <Picture src={img1} jpg={img1Jpg} className="w-[50%] m-auto" />
               <br />
               <br />
               <Text text={"개발하는 남자와"} />
@@ -67,7 +69,7 @@ function Scene2({ height }: { height: number }) {
                   tweenFn: animation.easeInOutQuad,
                 },
               ]}>
-              <Picture src={img2} className="w-[50%] m-auto" />
+              <Picture src={img2} jpg={img2Jpg} className="w-[50%] m-auto" />
               <br />
               <br />
               <Text text={"디자인하는 여자가 만났습니다."} />

@@ -2,6 +2,7 @@ import React from "react";
 
 interface PictureProps {
   src: string;
+  jpg?: string;
   alt?: string;
   style?: React.CSSProperties;
   className?: string;
@@ -10,6 +11,7 @@ interface PictureProps {
 
 export function Picture({
   src,
+  jpg,
   alt = "",
   style = {},
   className = "",
@@ -17,7 +19,11 @@ export function Picture({
 }: PictureProps) {
   return (
     <div style={style} className={className}>
-      <img src={src} alt={alt} onClick={onClick} />
+      <picture>
+        <source srcSet={src} type="image/webp" />
+        <source srcSet={jpg} type="image/jpeg" />
+        <img src={src} alt={alt} onClick={onClick} />
+      </picture>
     </div>
   );
 }
