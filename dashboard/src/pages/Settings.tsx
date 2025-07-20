@@ -1,5 +1,5 @@
 import type { User } from "@/types";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const initialUser = {
   firstName: "Jane",
@@ -23,33 +23,16 @@ function Settings() {
   const [lastName, setLastName] = useState(initialUser.lastName);
   const [email, setEmail] = useState(initialUser.email);
   const [notifications, setNotifications] = useState(initialUser.notifications);
-  const [fullName, setFullName] = useState("");
   const [saved, setSaved] = useState(false);
-  const [updatedUser, setUpdatedUser] = useState<Partial<User> | null>(null);
 
-  // 불필요한 useEffect
-  useEffect(() => {
-    setFullName(`${firstName} ${lastName}`);
-  }, [firstName, lastName]);
-
-  // 불필요한 useEffect
-  useEffect(() => {
-    if (saved) {
-      const t = setTimeout(() => setSaved(false), 1500);
-      return () => clearTimeout(t);
-    }
-  }, [saved]);
-
-  // 불필요한 useEffect
-  useEffect(() => {
-    if (updatedUser) {
-      saveUser(updatedUser).then(() => setSaved(true));
-    }
-  }, [updatedUser]);
+  const fullName = `${firstName} ${lastName}`;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setUpdatedUser({ firstName, lastName, email });
+    saveUser({ firstName, lastName, email }).then(() => {
+      setSaved(true);
+      setTimeout(() => setSaved(false), 1500);
+    });
   };
 
   return (
