@@ -4,6 +4,7 @@ import Users from "@/pages/Users";
 import Analytics from "@/pages/Analytics";
 import Products from "@/pages/Products";
 import Settings from "@/pages/Settings";
+import PurchaseStatus from "@/pages/PurchaseStatus";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/users" element={<Users />} />
         <Route path="/products" element={<Products />} />
         <Route path="/analytics" element={<Analytics />} />
+        <Route path="/purchase-status" element={<PurchaseStatus />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
     </Layout>

@@ -22,3 +22,20 @@ export interface ChartData {
   date: string;
   value: number;
 }
+
+export interface PurchaseStatus {
+  id: number;
+  name: string;
+  price: number;
+  discount: number;
+  tax: number;
+  shippingAddress: string;
+  date: string;
+  orderName: string;
+  orderCountry: string;
+  orderEmail: string;
+  orderPhone: string;
+  orderAddress: string;
+  orderDate: string;
+  orderStatus: "pending" | "approved" | "rejected";
+}

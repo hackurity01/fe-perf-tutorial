@@ -1,4 +1,4 @@
-import type { Product, User, ChartData } from "@/types";
+import type { Product, User, ChartData, PurchaseStatus } from "@/types";
 import { faker } from "@faker-js/faker";
 
 export const getUsers = (): Promise<User[]> =>
@@ -52,6 +52,64 @@ export const getProducts = ({ query }: { query: string }): Promise<Product[]> =>
             p.description.toLowerCase().includes(query.toLowerCase())
         );
       }
+      resolve(data);
+    }, 300);
+  });
+
+export const getRealTimePurchaseStatus = (): Promise<PurchaseStatus[]> =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      console.info("[Network] getRealTimePurchaseStatus");
+      const data = Array.from(
+        { length: Math.floor(Math.random() * 40) + 60 },
+        (_, i) => ({
+          id: i + 1,
+          name: faker.commerce.productName(),
+          price: Number(faker.commerce.price()),
+          discount: Number(faker.commerce.price()),
+          tax: Number(faker.commerce.price()),
+          shippingAddress: faker.location.streetAddress(),
+          date: faker.date.recent().toISOString().slice(0, 10),
+          orderName: faker.person.firstName(),
+          orderCountry: faker.location.country(),
+          orderEmail: faker.internet.email(),
+          orderPhone: faker.phone.number(),
+          orderAddress: faker.location.streetAddress(),
+          orderDate: faker.date.recent().toISOString().slice(0, 10),
+          orderStatus: ["pending", "approved", "rejected"][
+            Math.floor(Math.random() * 3)
+          ] as PurchaseStatus["orderStatus"],
+        })
+      );
+      resolve(data);
+    }, 300);
+  });
+
+export const getRealTimeRefundStatus = (): Promise<PurchaseStatus[]> =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      console.info("[Network] getRealTimeRefundStatus");
+      const data = Array.from(
+        { length: Math.floor(Math.random() * 40) + 60 },
+        (_, i) => ({
+          id: i + 1,
+          name: faker.commerce.productName(),
+          price: Number(faker.commerce.price()),
+          discount: Number(faker.commerce.price()),
+          tax: Number(faker.commerce.price()),
+          shippingAddress: faker.location.streetAddress(),
+          date: faker.date.recent().toISOString().slice(0, 10),
+          orderName: faker.person.firstName(),
+          orderCountry: faker.location.country(),
+          orderEmail: faker.internet.email(),
+          orderPhone: faker.phone.number(),
+          orderAddress: faker.location.streetAddress(),
+          orderDate: faker.date.recent().toISOString().slice(0, 10),
+          orderStatus: ["pending", "approved", "rejected"][
+            Math.floor(Math.random() * 3)
+          ] as PurchaseStatus["orderStatus"],
+        })
+      );
       resolve(data);
     }, 300);
   });
